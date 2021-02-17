@@ -52,7 +52,10 @@ func (this *RpcClient) LetMeIn(ip string, port int) error {
 		this.cluster.MakeMasterNode(response.NodeInfo.Name)
 	} else {
 		client.Close()
-		this.LetMeIn(response.NodeInfo.Ip, response.NodeInfo.Port)
+		if response.NodeInfo != nil {
+			this.LetMeIn(response.NodeInfo.Ip, response.NodeInfo.Port)
+		}
+
 	}
 	return err
 }
